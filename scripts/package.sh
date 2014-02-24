@@ -51,6 +51,7 @@ PACKAGE=(
     bison
     byacc
     make
+    cmake
     git
     gcc-c++
     ncurses-devel
