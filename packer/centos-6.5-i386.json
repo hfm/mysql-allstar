@@ -1,0 +1,45 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vagrant.sh",
+        "scripts/virtualbox.sh",
+        "scripts/package.sh",
+        "scripts/cleanup.sh"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 9,
+      "output": "./builds/centos6.5-i386-mysql-allstar.box"
+    }
+  ],
+  "builders": [
+    {
+      "vm_name": "centos6.5-i386-mysql-allstar",
+      "guest_os_type": "RedHat",
+      "iso_checksum_type": "md5",
+      "iso_checksum": "c98e8040b9ac107153fc1757b4874198",
+      "iso_url": "http://ftp.riken.jp/Linux/centos/6.5/isos/i386/CentOS-6.5-i386-bin-DVD1.iso",
+      "type": "virtualbox-iso",
+      "ssh_password": "vagrant",
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "300s",
+      "disk_size": 50000,
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
+        [ "modifyvm", "{{.Name}}", "--cpus",   "2"    ]
+      ],
+      "http_directory": "http",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-centos-6.5.cfg<enter>"
+      ],
+      "boot_wait": "10s",
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
+    }
+  ]
+}
