@@ -31,6 +31,7 @@ PACKAGE=(
     bison
     byacc
     make
+    cmake
     gcc-c++
     ncurses-devel
     puppet
