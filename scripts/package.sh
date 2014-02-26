@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs -L 'https://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs'
 cat <<'EOF' > /etc/yum.repos.d/puppetlabs.repo
