@@ -1,22 +1,27 @@
 ```
 .
-├── Gemfile
-├── Rakefile
-├── Vagrantfile
 ├── builds
+│   ├── centos-4.8-i386.box
+│   ├── centos-4.8-x86_64.box
+│   ├── centos-5.10-i386.box
+│   ├── centos-5.10-x86_64.box
+│   ├── centos-6.5-i386.box
+│   └── centos-6.5-x86_64.box
 ├── http
-│   ├── install.sh
-│   └── install_i386.sh
+│   ├── ks-centos-4.8.cfg
+│   ├── ks-centos-5.10.cfg
+│   └── ks-centos-6.5.cfg
 ├── packer
-│   ├── centos4.8-i386-mysql-allstar.box
-│   ├── centos4.8-x84_64-mysql-allstar.box
-│   ├── centos5.10-i386-mysql-allstar.box
-│   ├── centos5.10-x84_64-mysql-allstar.box
-│   ├── centos6.5-i386-mysql-allstar.box
-│   └── centos6.5-x84_64-mysql-allstar.box
+│   ├── centos-4.8-i386.json
+│   ├── centos-4.8-x86_64.json
+│   ├── centos-5.10-i386.json
+│   ├── centos-5.10-x86_64.json
+│   ├── centos-6.5-i386.json
+│   └── centos-6.5-x86_64.json
 └── scripts
-    ├── cleanup.sh
-    ├── puppet.sh
-    ├── vagrant.sh
-    └── virtualbox.sh
+     ├── cleanup.sh
+     ├── mysql-build.sh
+     ├── package.sh
+     ├── vagrant.sh
+     └── virtualbox.sh
 ```
