@@ -1,62 +1,31 @@
-#!/bin/sh -e
+#!/bin/sh
 
+set -e
+
+osmajor=$(awk '{print $3}' /etc/redhat-release | sed 's/\..*//')
+osarch=`uname -i`
+
+# puppetlabs
 curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs -L 'https://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs'
-cat <<'EOF' > /etc/yum.repos.d/puppetlabs.repo
-[puppetlabs-products]
-name=Puppet Labs Products El $releasever - $basearch
-baseurl=http://yum.puppetlabs.com/el/$releasever/products/$basearch
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
-enabled=1
-gpgcheck=1
+rpm -ivh "http://yum.puppetlabs.com/el/${osmajor}/products/${osarch}/puppetlabs-release-${osmajor}-10.noarch.rpm"
 
-[puppetlabs-deps]
-name=Puppet Labs Dependencies El $releasever - $basearch
-baseurl=http://yum.puppetlabs.com/el/$releasever/dependencies/$basearch
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
-enabled=1
-gpgcheck=1
-EOF
+# epel
+curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL -L "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/RPM-GPG-KEY-EPEL"
+if [ $osmajor -eq 5 ];then
+    rpm -ivh "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/5/${osarch}/epel-release-5-4.noarch.rpm"
+else
+    rpm -ivh "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/6/${osarch}/epel-release-6-8.noarch.rpm"
+fi
 
-cat <<'EOF' > /etc/yum.repos.d/epel.repo
-[epel]
-name=Extra Packages for Enterprise Linux $releasever - $basearch
-#baseurl=http://download.fedoraproject.org/pub/epel/$releasever/$basearch
-mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=x86_64
-failovermethod=priority
-enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
-
-[epel-debuginfo]
-name=Extra Packages for Enterprise Linux $releasever - $basearch - Debug
-#baseurl=http://download.fedoraproject.org/pub/epel/$releasever/$basearch/debug
-mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-6&arch=$basearch
-failovermethod=priority
-enabled=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
-gpgcheck=1
-
-[epel-source]
-name=Extra Packages for Enterprise Linux $releasever - $basearch - Source
-#baseurl=http://download.fedoraproject.org/pub/epel/$releasever/SRPMS
-mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-6&arch=$basearch
-failovermethod=priority
-enabled=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
-gpgcheck=1
-EOF
-
-cat <<'EOF' > /etc/yum.repos.d/rpmforge.repo
-[rpmforge]
-name = RHEL $releasever - RPMforge.net - dag
-baseurl = http://apt.sw.be/redhat/el$releasever/en/$basearch/rpmforge
-mirrorlist = http://apt.sw.be/redhat/el$releasever/en/mirrors-rpmforge
-#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge
-enabled = 0
-protect = 0
-gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
-gpgcheck = 1
-EOF
+# rpmforge
+if [ $osmajor -eq 5 ];then
+    rpmforge=rpmforge-release-0.5.3-1.el5.rf.${osarch}.rpm
+    rpm --import -v http://apt.sw.be/RPM-GPG-KEY.dag.txt
+    curl -OL "http://pkgs.repoforge.org/rpmforge-release/${rpmforge}"
+    rpm -K $rpmforge
+    rpm -ivh $rpmforge
+    sed -i 's/enabled = 1/enabled = 0/' /etc/yum.repos.d/rpmforge.repo
+fi
 
 PACKAGE=(
     bison
@@ -66,8 +35,11 @@ PACKAGE=(
     ncurses-devel
     puppet
 )
-for p in ${PACKAGE[@]}; do
-    yum -y install $p
-done
+yum -y install ${PACKAGE[@]}
+if [ $osmajor -eq 5 ];then
+    yum --enablerepo=rpmforge -y install git
+else
+    yum -y install git
+fi
 
-yum --enablerepo=rpmforge -y install git
+yum clean all
