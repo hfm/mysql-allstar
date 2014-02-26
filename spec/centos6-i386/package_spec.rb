@@ -1,1 +1,1 @@
-../centos5-i386/package_spec.rb
+../centos4-i386/package_spec.rb
