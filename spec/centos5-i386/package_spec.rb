@@ -3,10 +3,11 @@ require 'spec_helper'
 %w(
   bison
   byacc
-  make
+  cmake
   gcc
   gcc-c++
   git
+  make
   ncurses-devel
   puppet
 ).each do |p|
