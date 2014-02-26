@@ -24,6 +24,7 @@ done
 VERSs=(
     5.5.36
     5.6.16
+    5.7.3-m13
 )
 
 for ver in ${VERSs[@]}; do
