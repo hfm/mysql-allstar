@@ -17,7 +17,7 @@ enabled=1
 gpgcheck=1
 EOF
 
-cat <<'EOF' > /etc/yum.repos.d/epel
+cat <<'EOF' > /etc/yum.repos.d/epel.repo
 [epel]
 name=Extra Packages for Enterprise Linux $releasever - $basearch
 #baseurl=http://download.fedoraproject.org/pub/epel/$releasever/$basearch
@@ -46,12 +46,22 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
 gpgcheck=1
 EOF
 
+cat <<'EOF' > /etc/yum.repos.d/rpmforge.repo
+[rpmforge]
+name = RHEL $releasever - RPMforge.net - dag
+baseurl = http://apt.sw.be/redhat/el$releasever/en/$basearch/rpmforge
+mirrorlist = http://apt.sw.be/redhat/el$releasever/en/mirrors-rpmforge
+#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge
+enabled = 0
+protect = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
+gpgcheck = 1
+EOF
 
 PACKAGE=(
     bison
     byacc
     make
-    git
     gcc-c++
     ncurses-devel
     puppet
@@ -59,3 +69,5 @@ PACKAGE=(
 for p in ${PACKAGE[@]}; do
     yum -y install $p
 done
+
+yum --enablerepo=rpmforge -y install git
