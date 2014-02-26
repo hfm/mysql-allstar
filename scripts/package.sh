@@ -24,6 +24,7 @@ if [ $osmajor -eq 5 ];then
     curl -OL "http://pkgs.repoforge.org/rpmforge-release/${rpmforge}"
     rpm -K $rpmforge
     rpm -ivh $rpmforge
+    rm -f $rpmforge
     sed -i 's/enabled = 1/enabled = 0/' /etc/yum.repos.d/rpmforge.repo
 fi
 
