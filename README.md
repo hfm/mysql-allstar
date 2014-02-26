@@ -1,12 +1,12 @@
 ```
 .
 ├── builds
-│   ├── centos-4.8-i386.box
-│   ├── centos-4.8-x86_64.box
-│   ├── centos-5.10-i386.box
-│   ├── centos-5.10-x86_64.box
-│   ├── centos-6.5-i386.box
-│   └── centos-6.5-x86_64.box
+│   ├── centos-4.8-i386-mysql-allstar.box
+│   ├── centos-4.8-x86_64-mysql-allstar.box
+│   ├── centos-5.10-i386-mysql-allstar.box
+│   ├── centos-5.10-x86_64-mysql-allstar.box
+│   ├── centos-6.5-i386-mysql-allstar.box
+│   └── centos-6.5-x86_64-mysql-allstar.box
 ├── http
 │   ├── ks-centos-4.8.cfg
 │   ├── ks-centos-5.10.cfg
