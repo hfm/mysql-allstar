@@ -25,11 +25,6 @@ VERSs=(
     5.5.36
     5.6.16
     5.7.3-m13
-    facebook-5.6.12
-    mariadb-5.5.35
-    percona-5.5.34-32.0
-    percona-5.6.15-63.0
-    twitter-5.5.33.t12
 )
 
 for ver in ${VERSs[@]}; do
