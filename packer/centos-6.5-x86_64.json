@@ -6,6 +6,7 @@
         "scripts/vagrant.sh",
         "scripts/virtualbox.sh",
         "scripts/package.sh",
+        "scripts/mysql-build.sh",
         "scripts/cleanup.sh"
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
@@ -38,7 +39,7 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-centos-6.5.cfg<enter>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "5s",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
     }
   ]

@@ -38,7 +38,7 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-centos-4.8.cfg<enter>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "5s",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
     }
   ]

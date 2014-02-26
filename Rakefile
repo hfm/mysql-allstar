@@ -13,11 +13,11 @@ namespace :vagrant do
 
   vms = %w(
     centos4-i386
-    centos4-x86_64
+    centos4-x86
     centos5-i386
-    centos5-x86_64
+    centos5-x86
     centos6-i386
-    centos6-x86_64
+    centos6-x86
   )
 
   task :all => vms.map { |vm| "vagrant:#{vm}" }

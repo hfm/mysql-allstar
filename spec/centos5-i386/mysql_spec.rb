@@ -8,7 +8,7 @@ require 'spec_helper'
   /home/vagrant/mysql/5.5.36/bin/mysql
   /home/vagrant/mysql/5.6.16/bin/mysql
 ).each do |f|
-  describe package(f) do
+  describe file(f) do
     it { should be_executable }
   end
 end
