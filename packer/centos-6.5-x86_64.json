@@ -29,7 +29,7 @@
       "type": "virtualbox-iso",
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
-      "ssh_wait_timeout": "300s",
+      "ssh_wait_timeout": "600s",
       "disk_size": 50000,
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
