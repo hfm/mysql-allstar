@@ -1,5 +1,7 @@
 #!/bin/sh
 
+PATH=/usr/bin:/sbin:/usr/sbin:/usr/local/bin:$PATH
+
 BUILD_PATH=/home/vagrant/mysql-build
 MYSQL_PATH=/home/vagrant/mysql
 

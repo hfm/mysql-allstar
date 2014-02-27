@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+PATH=/usr/bin:/sbin:/usr/sbin:$PATH
+
 yum -y clean all
 rm -rf *.iso *.iso.?
 rm -rf /tmp/*
