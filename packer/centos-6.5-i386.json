@@ -5,7 +5,7 @@
       "scripts": [
         "scripts/vagrant.sh",
         "scripts/virtualbox.sh",
-        "scripts/package.sh",
+        "scripts/package6.sh",
         "scripts/mysql-build.sh",
         "scripts/cleanup.sh"
       ],
