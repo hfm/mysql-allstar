@@ -6,6 +6,7 @@
         "scripts/vagrant.sh",
         "scripts/virtualbox.sh",
         "scripts/package.sh",
+        "scripts/mysql-build.sh",
         "scripts/cleanup.sh"
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
@@ -28,7 +29,7 @@
       "type": "virtualbox-iso",
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
-      "ssh_wait_timeout": "300s",
+      "ssh_wait_timeout": "600s",
       "disk_size": 50000,
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
@@ -38,7 +39,7 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-centos-4.8.cfg<enter>"
       ],
-      "boot_wait": "5s",
+      "boot_wait": "10s",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
     }
   ]
