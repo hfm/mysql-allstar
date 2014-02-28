@@ -6,7 +6,6 @@
         "scripts/vagrant.sh",
         "scripts/virtualbox.sh",
         "scripts/package4.sh",
-        "scripts/mysql-build.sh",
         "scripts/cleanup.sh"
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S bash '{{.Path}}'"
