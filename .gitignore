@@ -3,3 +3,4 @@ packer_cache/
 .bundle/
 output-virtualbox-iso/
 builds/*.box
+.DS_Store
