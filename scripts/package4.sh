@@ -6,7 +6,10 @@ PATH=/usr/bin:/sbin:/usr/sbin:/usr/local/bin:$PATH
 
 osarch=`uname -i`
 
-# epel
+curl -o /usr/share/ssl/certs/ca-bundle.crt -kL "https://www.digicert.com/testroot/DigiCertHighAssuranceEVRootCA.crt"
+
+rpm -Uvh "http://www.sudo.ws/sudo/dist/packages/Centos/4/sudo-1.8.9-6.el4.${osarch}.rpm"
+
 cat <<'EOT' > /etc/yum.repos.d/CentOS-Base.repo
 [base]
 name=CentOS-$releasever - Base
@@ -53,14 +56,15 @@ rpm -ivh "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/4/${osarch}/epel-release-
 PACKAGE=(
     bison
     byacc
+    curl-devel
     make
     cmake
     gcc-c++
-    git
     ncurses-devel
     puppet
 )
 yum install -y ${PACKAGE[@]}
 
 yum update -y
+
 yum clean all

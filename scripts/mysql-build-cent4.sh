@@ -2,15 +2,18 @@
 
 set -e
 
-PATH=/usr/bin:/sbin:/usr/sbin:/usr/local/bin:$PATH
+PATH=/usr/local/bin:/usr/bin:/sbin:/usr/sbin:$PATH
 
 BUILD_PATH=/home/vagrant/mysql-build
 MYSQL_PATH=/home/vagrant/mysql
 
-if [ -d $BUILD_PATH ]; then
-    wget https://github.com/kamipo/mysql-build/archive/master.zip
-    unzip master.zip $BUILD_PATH
-fi
+echo "Use newer git"
+curl -OLk "https://git-core.googlecode.com/files/git-1.9.0.tar.gz"
+tar zxfv git-1.9.0.tar.gz
+cd git-1.9.0
+./configure && make && make install
+
+[ -d $BUILD_PATH ] || git clone https://github.com/kamipo/mysql-build.git $BUILD_PATH
 [ -d $MYSQL_PATH ] || mkdir $MYSQL_PATH
 
 VERS=(
@@ -31,7 +34,6 @@ done
 VERSs=(
     5.5.36
     5.6.16
-    5.7.3-m13
 )
 
 for ver in ${VERSs[@]}; do
@@ -42,5 +44,5 @@ for ver in ${VERSs[@]}; do
     ./scripts/mysql_install_db
 done
 
-rm -rf $BUILD_PATH
+rm -rf $BUILD_PATH /home/vagrant/git-1.9.0 /home/vagrant/git-1.9.0.tar.gz
 chown -R vagrant:vagrant $MYSQL_PATH
