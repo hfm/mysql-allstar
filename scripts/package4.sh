@@ -48,8 +48,6 @@ priority=1
 protect=1
 EOT
 
-yum -y update
-
 rpm -ivh "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/4/${osarch}/epel-release-4-10.noarch.rpm"
 
 PACKAGE=(
@@ -62,6 +60,7 @@ PACKAGE=(
     ncurses-devel
     puppet
 )
-yum -y install ${PACKAGE[@]}
+yum install -y ${PACKAGE[@]}
 
+yum update -y
 yum clean all

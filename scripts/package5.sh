@@ -7,12 +7,20 @@ PATH=/usr/bin:/sbin:/usr/sbin:/usr/local/bin:$PATH
 osarch=`uname -i`
 
 # puppet
-curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs -L "http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs"
-rpm -ivh "https://yum.puppetlabs.com/el/5/products/${osarch}/puppetlabs-release-5-7.noarch.rpm"
+puppetrepo=puppetlabs-release-5-10.noarch.rpm
+rpm --import -v "http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs"
+wget "https://yum.puppetlabs.com/el/5/products/${osarch}/${puppetrepo}"
+rpm -K $puppetrepo
+rpm -ivh $puppetrepo
+rm -f $puppetrepo
 
 # epel
-curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL -L "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/RPM-GPG-KEY-EPEL"
-rpm -ivh "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/5/${osarch}/epel-release-5-4.noarch.rpm"
+epel=epel-release-5-4.noarch.rpm
+rpm --import -v "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/RPM-GPG-KEY-EPEL"
+wget "http://ftp.jaist.ac.jp/pub/Linux/Fedora/epel/5/${osarch}/${epel}"
+rpm -K $epel
+rpm -ivh $epel
+rm -f $epel
 
 # rpmforge
 rpmforge=rpmforge-release-0.5.3-1.el5.rf.${osarch}.rpm
@@ -36,4 +44,5 @@ PACKAGE=(
 yum -y install ${PACKAGE[@]}
 yum --enablerepo=rpmforge -y install git
 
+yum update -y
 yum clean all

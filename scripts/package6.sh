@@ -25,6 +25,7 @@ PACKAGE=(
     ncurses-devel
     puppet
 )
-yum -y install ${PACKAGE[@]}
+yum install -y ${PACKAGE[@]}
 
+yum update -y
 yum clean all
