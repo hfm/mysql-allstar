@@ -17,7 +17,6 @@ $ vagrant up
 $ brew tap homebrew/binary
 $ brew install packer
 $ packer build packer/centos-<osversion>-<osarch>.json
-
 ```
 
 ### test box
