@@ -64,7 +64,3 @@ PACKAGE=(
     puppet
 )
 yum install -y ${PACKAGE[@]}
-
-yum update -y
-
-yum clean all

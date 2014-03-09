@@ -43,6 +43,3 @@ PACKAGE=(
 )
 yum -y install ${PACKAGE[@]}
 yum --enablerepo=rpmforge -y install git
-
-yum update -y
-yum clean all
