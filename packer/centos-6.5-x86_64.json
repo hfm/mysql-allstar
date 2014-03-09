@@ -1,24 +1,4 @@
 {
-  "provisioners": [
-    {
-      "type": "shell",
-      "scripts": [
-        "scripts/vagrant.sh",
-        "scripts/package.sh",
-        "scripts/virtualbox.sh",
-        "scripts/mysql-build.sh",
-        "scripts/cleanup.sh"
-      ],
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
-    }
-  ],
-  "post-processors": [
-    {
-      "type": "vagrant",
-      "compression_level": 9,
-      "output": "./builds/centos6.5-x86_64-mysql-allstar.box"
-    }
-  ],
   "builders": [
     {
       "vm_name": "centos6.5-x86_64-mysql-allstar",
@@ -39,6 +19,26 @@
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-centos-6.5.cfg<enter>"
       ],
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vagrant.sh",
+        "scripts/package.sh",
+        "scripts/virtualbox.sh",
+        "scripts/mysql-build.sh",
+        "scripts/cleanup.sh"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 9,
+      "output": "./builds/centos6.5-x86_64-mysql-allstar.box"
     }
   ]
 }

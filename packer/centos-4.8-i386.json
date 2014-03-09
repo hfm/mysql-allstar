@@ -40,7 +40,7 @@
     {
       "type": "vagrant",
       "compression_level": 9,
-      "output": "builds/{{.BuildName}}.box"
+      "output": "builds/centos4.8-i386-mysql-allstar.box"
     }
   ]
 }
