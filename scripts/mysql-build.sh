@@ -13,6 +13,8 @@ VERS=(
     4.1.25
     5.0.96
     5.1.73
+    5.5.36
+    5.6.16
 )
 
 for ver in ${VERS[@]}; do
@@ -21,20 +23,8 @@ for ver in ${VERS[@]}; do
 
     cd "$MYSQL_PATH/$ver"
     ./bin/mysql_install_db
-done
-
-VERSs=(
-    5.5.36
-    5.6.16
-)
-
-for ver in ${VERSs[@]}; do
-    cd $BUILD_PATH
-    ./bin/mysql-build -v $ver "$MYSQL_PATH/$ver"
-
-    cd "$MYSQL_PATH/$ver"
     ./scripts/mysql_install_db
 done
 
-rm -rf $BUILD_PATH
+chown -R vagrant:vagrant $BUILD_PATH
 chown -R vagrant:vagrant $MYSQL_PATH
