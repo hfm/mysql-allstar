@@ -40,7 +40,21 @@ elif [ "$osmajor" == 5 ]; then
     rpm -ivh $rpmforge
     sed -i 's/enabled = 1/enabled = 0/' /etc/yum.repos.d/rpmforge.repo
 fi
-yum install -y puppet cmake
+
+packages=(
+    bison
+    byacc
+    cmake
+    gcc
+    gcc-c++
+    make
+    openssl-devel
+    readline-devel
+    zlib-devel
+)
+
+yum install -y puppet ${packages[@]}
+
 
 # chef
 curl -kL 'https://www.opscode.com/chef/install.sh' | bash
