@@ -16,7 +16,7 @@
       ],
       "http_directory": "http",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-centos-5.10.cfg<enter>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks-centos5.cfg<enter>"
       ],
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/halt -h -p"
     }
