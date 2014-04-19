@@ -48,13 +48,13 @@ packages=(
     gcc
     gcc-c++
     make
+    ncurses-devel
     openssl-devel
     readline-devel
     zlib-devel
 )
 
 yum install -y puppet ${packages[@]}
-
 
 # chef
 curl -kL 'https://www.opscode.com/chef/install.sh' | bash
