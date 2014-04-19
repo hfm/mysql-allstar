@@ -2,11 +2,18 @@
 
 PATH=/usr/local/bin:/usr/bin:/sbin:/usr/sbin:$PATH
 
-BUILD_PATH=/home/vagrant/mysql-build
-MYSQL_PATH=/home/vagrant/mysql
+build_path=/home/vagrant/mysql-build
+mysql_path=/home/vagrant/mysql
 
-[ -d $BUILD_PATH ] || git clone https://github.com/kamipo/mysql-build.git $BUILD_PATH
-[ -d $MYSQL_PATH ] || mkdir $MYSQL_PATH
+[ -d $build_path ] || git clone https://github.com/kamipo/mysql-build.git $build_path
+[ -d $build_path ] && {
+    pushd $build_path
+    git checkout master
+    git pull
+    popd
+}
+
+install -o vagrant -g vagrant -d $mysql_path
 
 VERS=(
     4.0.30
@@ -17,14 +24,20 @@ VERS=(
     5.6.17
 )
 
+pushd $build_path
 for ver in ${VERS[@]}; do
-    cd $BUILD_PATH
-    ./bin/mysql-build -v $ver "$MYSQL_PATH/$ver"
+    ./bin/mysql-build $ver "${mysql_path}/${ver}"
+done
+popd
 
-    cd "$MYSQL_PATH/$ver"
+pushd "${mysql_path}/${ver}"
+for ver in ${VERS[@]}; do
+    mkdir "${mysql_path}/${ver}/etc"
+    mkdir -p "${mysql_path}/${ver}/{log,lib}/mysql"
     ./bin/mysql_install_db
     ./scripts/mysql_install_db
 done
+popd
 
-chown -R vagrant:vagrant $BUILD_PATH
-chown -R vagrant:vagrant $MYSQL_PATH
+chown -R vagrant:vagrant $build_path
+chown -R vagrant:vagrant $mysql_path
