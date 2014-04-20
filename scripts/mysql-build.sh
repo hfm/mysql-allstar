@@ -7,6 +7,8 @@ mysql_path=/home/vagrant/mysql
 
 [ -d $build_path ] || git clone https://github.com/kamipo/mysql-build.git $build_path
 
+groupadd mysql
+useradd -s /sbin/nologin -g mysql mysql
 install -o vagrant -g vagrant -d $mysql_path
 
 VERS=(
