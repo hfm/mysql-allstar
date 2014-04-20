@@ -59,7 +59,7 @@ EOS
     if [ $mysqlminor -ge 5 ]; then
         echo "character-set-server = utf8 " >>${mysql_path}/${ver}/etc/my.cnf
     else
-        echo "default-character-set= utf8 " >>${mysql_path}/${ver}/etc/my.cnf
+        echo "default-character-set = utf8 " >>${mysql_path}/${ver}/etc/my.cnf
     fi
 
     mysqlmajor=$(${mysql_path}/${ver}/bin/mysql --version | awk '{print $5}' | cut -f1 -d'.')
