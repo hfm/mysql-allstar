@@ -17,6 +17,8 @@ VERS=(
     5.6.17
 )
 
+
+# global my.cnf
 cat<<'EOS' >/etc/my.cnf
 [client]
 user = vagrant
@@ -31,12 +33,16 @@ interactive-timeout
 quick
 EOS
 
+
+# install each mysql
 pushd $build_path
 for ver in ${VERS[@]}; do
     ./bin/mysql-build $ver "${mysql_path}/${ver}"
 done
 popd
 
+
+# setup directory and my.cnf
 for ver in ${VERS[@]}; do
     pushd "${mysql_path}/${ver}"
 
