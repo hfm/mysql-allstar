@@ -78,13 +78,15 @@ chown -R vagrant:vagrant $mysql_path
 
 ### SETUP mysql_install_db
 for ver in ${VERS[@]}; do
-    pushd "${mysql_path}/${ver}"
-
     if [ -f "bin/mysql_install_db" ]; then
+        pushd "${mysql_path}/${ver}"
         ./bin/mysql_install_db
+        popd
     else
-        ./scripts/mysql_install_db
+        su - vagrant -p -c "
+            pushd "${mysql_path}/${ver}"
+            ./scripts/mysql_install_db
+            popd
+        "
     fi
-
-    popd
 done
