@@ -19,7 +19,7 @@ VERS=(
 )
 
 
-# global my.cnf
+### GLOBAL my.cnf
 cat<<'EOS' >/etc/my.cnf
 [client]
 user = vagrant
@@ -35,7 +35,7 @@ quick
 EOS
 
 
-# install each mysql
+### INSTALL EACH MySQL
 pushd $build_path
 for ver in ${VERS[@]}; do
     ./bin/mysql-build $ver "${mysql_path}/${ver}"
@@ -43,7 +43,7 @@ done
 popd
 
 
-# setup directory and my.cnf
+### SETUP my.cnf
 for ver in ${VERS[@]}; do
     pushd "${mysql_path}/${ver}"
 
@@ -76,10 +76,11 @@ EOS
     popd
 done
 
+### SET USER AND GROUP
 chown -R vagrant:vagrant $mysql_path
 
 
-# setup for mysql_install_db
+### SETUP mysql_install_db
 for ver in ${VERS[@]}; do
     pushd "${mysql_path}/${ver}"
 
