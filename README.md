@@ -19,7 +19,7 @@ $ brew install packer
 $ packer build packer/centos-<osversion>-<osarch>.json
 ```
 
-### test box
+### test box with serverspec
 
 ```console
 $ bundle install --path vendor
