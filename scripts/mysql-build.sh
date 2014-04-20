@@ -49,8 +49,7 @@ for ver in ${VERS[@]}; do
     mkdir ${mysql_path}/${ver}/etc
     mkdir -p ${mysql_path}/${ver}/var/{log,lib}/mysql
 
-    if [ -f "bin/mysql_install_db" ]; then
-        cat<<EOS >${mysql_path}/${ver}/etc/my.cnf
+    cat<<EOS >${mysql_path}/${ver}/etc/my.cnf
 [client]
 socket = ${mysql_path}/${ver}/var/lib/mysql
 
@@ -58,16 +57,26 @@ socket = ${mysql_path}/${ver}/var/lib/mysql
 socket = ${mysql_path}/${ver}/var/lib/mysql
 default-character-set = utf8
 EOS
+
+    mysqlmajor=$(${mysql_path}/${ver}/bin/mysql --version | awk '{print $5}' | cut -f1 -d'.')
+    if [ $mysqlmajor -eq 5 ]; then
+        cat<<EOS >>${mysql_path}/${ver}/etc/my.cnf
+innodb_data_file_path=ibdata1:10M:autoextend
+innodb_file_per_table
+EOS
+    fi
+
+    popd
+done
+
+
+# setup for mysql_install_db
+for ver in ${VERS[@]}; do
+    pushd "${mysql_path}/${ver}"
+
+    if [ -f "bin/mysql_install_db" ]; then
         ./bin/mysql_install_db
     else
-        cat<<EOS >${mysql_path}/${ver}/etc/my.cnf
-[client]
-socket = ${mysql_path}/${ver}/var/lib/mysql
-
-[mysqld]
-socket = ${mysql_path}/${ver}/var/lib/mysql
-character-set-server = utf8
-EOS
         ./scripts/mysql_install_db
     fi
 
