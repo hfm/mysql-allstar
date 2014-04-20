@@ -6,12 +6,6 @@ build_path=/home/vagrant/mysql-build
 mysql_path=/home/vagrant/mysql
 
 [ -d $build_path ] || git clone https://github.com/kamipo/mysql-build.git $build_path
-[ -d $build_path ] && {
-    pushd $build_path
-    git checkout master
-    git pull
-    popd
-}
 
 install -o vagrant -g vagrant -d $mysql_path
 
