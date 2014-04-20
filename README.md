@@ -7,7 +7,7 @@ MySQL 4.0 ~ 5.6 in one.
 Download boxes in [releases](https://github.com/tacahilo/mysql-allstar/releases), and vagrant up them.
 
 ```console
-$ vagrant init centos-6.5-x86_64-mysql-allstar https://github.com/tacahilo/mysql-allstar/releases/download/v0.1/centos-6.5-x86_64-mysql-allstar.box
+$ vagrant init hfm4/centos-6.5-x86_64-mysql-allstar
 $ vagrant up
 ```
 
