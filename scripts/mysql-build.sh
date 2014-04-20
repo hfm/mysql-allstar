@@ -39,17 +39,14 @@ EOS
 pushd $build_path
 for ver in ${VERS[@]}; do
     ./bin/mysql-build $ver "${mysql_path}/${ver}"
+    mkdir    ${mysql_path}/${ver}/etc
+    mkdir -p ${mysql_path}/${ver}/var/{log,lib}/mysql
 done
 popd
 
 
 ### SETUP my.cnf
 for ver in ${VERS[@]}; do
-    pushd "${mysql_path}/${ver}"
-
-    mkdir    ${mysql_path}/${ver}/etc
-    mkdir -p ${mysql_path}/${ver}/var/{log,lib}/mysql
-
     cat<<EOS >${mysql_path}/${ver}/etc/my.cnf
 [client]
 socket = ${mysql_path}/${ver}/var/lib/mysql
@@ -72,8 +69,6 @@ innodb_data_file_path=ibdata1:10M:autoextend
 innodb_file_per_table
 EOS
     fi
-
-    popd
 done
 
 ### SET USER AND GROUP
