@@ -65,8 +65,9 @@ EOS
     mysqlmajor=$(${mysql_path}/${ver}/bin/mysql --version | awk '{print $5}' | cut -f1 -d'.')
     if [ $mysqlmajor -eq 5 ]; then
         cat<<EOS >>${mysql_path}/${ver}/etc/my.cnf
-innodb_data_file_path=ibdata1:10M:autoextend
-innodb_file_per_table
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_file_per_table = 1
+innodb_file_format = Barracuda
 EOS
     fi
 done
