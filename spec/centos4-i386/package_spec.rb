@@ -10,6 +10,7 @@ require 'spec_helper'
   make
   ncurses-devel
   puppet
+  chef
 ).each do |p|
   describe package(p) do
     it { should be_installed }
