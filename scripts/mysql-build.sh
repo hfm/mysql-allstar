@@ -76,7 +76,7 @@ done
 chown -R vagrant:vagrant $mysql_path
 
 
-### SETUP mysql_install_db
+## SETUP mysql_install_db
 for ver in ${VERS[@]}; do
     if [ -f "bin/mysql_install_db" ]; then
         pushd "${mysql_path}/${ver}"
@@ -90,3 +90,5 @@ for ver in ${VERS[@]}; do
         "
     fi
 done
+
+rm -rf $build_path
