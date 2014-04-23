@@ -13,7 +13,7 @@
       "headless": "true",
       "vboxmanage": [
         [ "modifyvm", "{{.Name}}", "--memory", "1024" ],
-        [ "modifyvm", "{{.Name}}", "--cpus",   "1"    ]
+        [ "modifyvm", "{{.Name}}", "--cpus",   "2"    ]
       ],
       "http_directory": "http",
       "boot_command": [
