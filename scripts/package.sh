@@ -33,6 +33,14 @@ if [ $osmajor == 4 ]; then
     curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs -L 'http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs'
     rpm -ivh "https://yum.puppetlabs.com/el/$osmajor/products/$osarch/puppetlabs-release-$osmajor-10.noarch.rpm"
 elif [ "$osmajor" == 5 ]; then
+    # puppet
+    puppetrepo=puppetlabs-release-5-10.noarch.rpm
+    rpm --import -v "http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs"
+    wget "https://yum.puppetlabs.com/el/5/products/${osarch}/${puppetrepo}"
+    rpm -K $puppetrepo
+    rpm -ivh $puppetrepo
+    rm -f $puppetrepo
+
     rpmforge=rpmforge-release-0.5.3-1.el5.rf.${osarch}.rpm
     rpm --import -v http://apt.sw.be/RPM-GPG-KEY.dag.txt
     curl -OL "http://pkgs.repoforge.org/rpmforge-release/${rpmforge}"
