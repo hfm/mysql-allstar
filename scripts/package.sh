@@ -39,6 +39,8 @@ elif [ "$osmajor" == 5 ]; then
     rpm -Kv $rpmforge
     rpm -ivh $rpmforge
     sed -i 's/enabled = 1/enabled = 0/' /etc/yum.repos.d/rpmforge.repo
+    yum --enablerepo=rpmforge -y install git
+    rm $rpmforge
 fi
 
 packages=(
