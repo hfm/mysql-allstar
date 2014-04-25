@@ -4,22 +4,6 @@
 Vagrant.configure("2") do |config|
   config.vm.guest = :redhat
 
-  config.vm.define "centos4-i386" do |c|
-    c.vm.box      = "CentOS4.8-i386-mysql-allstar"
-    c.vm.box_url  = "./builds/centos4.8-i386-mysql-allstar.box"
-    c.vm.hostname = "mysqlallstar.centos4i386.dev"
-    c.vm.network :forwarded_port, guest: 3306, host: 33060
-    c.vm.network :private_network, ip: "192.168.2.100", virtualbox__intnet: "mysql_network"
-  end
-
-  config.vm.define "centos4-x86" do |c|
-    c.vm.box      = "CentOS4.8-x86_64-mysql-allstar"
-    c.vm.box_url  = "./builds/centos4.8-x86_64-mysql-allstar.box"
-    c.vm.hostname = "mysqlallstar.centos4x86.dev"
-    c.vm.network :forwarded_port, guest: 3306, host: 33061
-    c.vm.network :private_network, ip: "192.168.2.101", virtualbox__intnet: "mysql_network"
-  end
-
   config.vm.define "centos5-i386" do |c|
     c.vm.box      = "CentOS5.10-i386-mysql-allstar"
     c.vm.box_url  = "./builds/centos5.10-i386-mysql-allstar.box"
