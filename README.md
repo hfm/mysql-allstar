@@ -11,6 +11,13 @@ $ vagrant init hfm4/centos-6.5-x86_64-mysql-allstar
 $ vagrant up
 ```
 
+### Vagrantcloud
+
+ * hfm4/CentOS5.10-i386-mysql-allstar
+ * hfm4/CentOS5.10-x86_64-mysql-allstar
+ * hfm4/CentOS6.5-i386-mysql-allstar
+ * hfm4/CentOS6.5-x86_64-mysql-allstar
+
 ## Build with packer on your own
 
 ```console
