@@ -55,4 +55,4 @@ packages=(
 yum install -y puppet ${packages[@]}
 
 # chef
-&& curl -kL 'https://www.opscode.com/chef/install.sh' | bash
+curl -kL 'https://www.opscode.com/chef/install.sh' | bash
